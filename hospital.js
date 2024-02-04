@@ -34,6 +34,7 @@ app.get("/",(req,resp)=>{
 )
 
 app.post('/',(req,res)=>{
+    if (!nounhealthykidney()){
     var val1 = req.body.isHealthy;
     user[0].kidney.push({
         healthy:val1
@@ -41,7 +42,11 @@ app.post('/',(req,res)=>{
     res.json({
         msg:"Done"
     })
-    
+    }
+    else{
+        res.status(411).json({msg:"Their is nothing to update"})
+    }
+
 })
 
 app.put("/",(req,res)=>{
@@ -71,6 +76,21 @@ app.delete("/",(req,res)=>{
     }
 }
     )
+
+
+// check if their is no unhealthy kidney
+
+function nounhealthykidney(){
+    let unhealthykidney = true
+    for (let i = 0; i<user[0].kidney.length;i++){
+        if(!user[0].kidney[i].healthy){
+            return unhealthykidney
+        }
+        else{
+            return unhealthykidney
+        }
+    }
+}
 
 function unhealthkidneypresent(){
    let unhealthy = false
