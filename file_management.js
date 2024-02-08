@@ -22,16 +22,15 @@ app.get("/files/:filename?",(req,res)=>{
     const val = req.params.filename;
     console.log(`myfile/${val}`)
     console.log(fs.existsSync(`myfile/${val}`))
-    let content =""
     if(fs.existsSync(`myfile/${val}`)){
         let all_files = fs.readFile(`myfile/${val}`,'utf8',(res,data)=>{ 
             console.log(data)
         // res.status(200).json({Response:`ok`,val:all_files})
-    }
-    res.
-
+    })
+    res.send("ok")
+}
     else{
         res.status(404).json({Response:`file not exist`})
     }
-}
-)
+
+})
