@@ -3,6 +3,10 @@ const exp = require("express")
 const app = exp()
 const z = require("zod")
 
+// username,empid,empGender these keywords must be same as we are sending it from the front end.
+
+
+
 const schema = z.object({
     username:z.string(),
     empid : z.number(),
