@@ -48,7 +48,7 @@ app.post("/signup",(req,res)=>{
             msg:"user doesn't exist in our in memory db",
         });
     }
-    token = jwt.sign({newusername:newusername},jwtPassword);
+    token = jwt.sign({pusername:newusername},jwtPassword);
     console.log("TOken",token)
     return res.json({token});
     })
@@ -57,10 +57,10 @@ app.get("/login",(req,res)=>{
     const bearer = req.headers.bearer
     console.log("auth",bearer)
     const b = jwt.verify(bearer,jwtPassword)
-    console.log("bbbb",b['newusername'])
+    console.log("bbbb",b['pusername'])
 
     for(var l = 0;l<=all_user.length;i++){
-        if(b['newusername']==all_user[l]['username'])
+        if(b['pusername']==all_user[l]['username'])
             console.log("authentication successfull")
             return res.status(200).json({
                 msg:"Authentication successfull"})
