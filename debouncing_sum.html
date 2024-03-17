@@ -1,0 +1,39 @@
+<!-- here we want to send backend call after finish writing the numbers. we will use debouncing logic(which says if user not enter any text in the textbox for a constraint of time)
+then send backend call). if user enter something with in the constraint time will again destroy the old waiting clock and start a new clock . And if user dont do anything
+we will send the call-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        let x;
+        function populatediv(){
+            clearTimeout(x)
+           x = setTimeout(()=>{
+            actual_logic()
+           },3000)
+        } 
+
+        function actual_logic(){
+            const num1 = document.getElementById("num1").value
+            const num2 = document.getElementById("num2").value
+            fetch("https://sum-server.100xdevs.com/sum?a="+num1+"&b="+num2).then((resp)=>{
+                resp.text().then((ans)=>{
+                    console.log(ans)
+                    const result = document.createElement("div")
+                    result.innerHTML=ans
+                    document.body.append(result)
+                })
+            })
+        }
+    </script>
+</head>
+<body>
+    <label>Enter First Number:- &nbsp;</label>
+    <input id="num1" oninput="populatediv()" type="text" placeholder="First Number"><br><br>
+    <label>Enter Second Number:- &nbsp;</label>
+    <input id="num2" oninput="populatediv()" type="text" placeholder="Second Number">
+</body>
+</html>
