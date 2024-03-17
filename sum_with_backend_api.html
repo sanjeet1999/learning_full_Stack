@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function interestcal(){
+            const principal = document.getElementById("Principle").value
+            const rate = document.getElementById("Interest").value
+            const time = document.getElementById("Year").value
+            fetch("https://sum-server.100xdevs.com/interest?principal="+principal+"&rate="+rate+"&time="+time).then(function(resp){
+                resp.text().then(function(ans){
+                    const result = document.createElement('textarea')
+                    result.innerHTML = ans
+                    document.body.append(ans)
+
+                })
+            })
+        }
+    </script>
+</head>
+<body>
+    <h1>Interest Calculator</h1>
+    <label>Enter Principle Amount:- &nbsp;</label>
+    <input id ="Principle"type="text" placeholder="In INR"><br><br>
+    <label>Enter Rate(%):- &nbsp;</label>
+    <input id="Interest" type="text" placeholder="Interest rate"><br><br>
+    <label>Enter Time:-&nbsp; </label>
+    <input id="Year" type="text" placeholder="In year"><br><br>
+    <button onclick="interestcal()">Calculate Interest</button><br><br>
+
+</body>
+</html>
