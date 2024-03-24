@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        let idn = 0
+        function newfunction(current_id){
+            console.log("button clicked",current_id)
+            let button = document.getElementById(current_id+"_bt")
+            button.innerHTML = "Done!"
+            return 
+        }
+
+        function populateresult(){
+            let title = document.getElementById("title").value
+            let description = document.getElementById("description").value
+            let parent = document.createElement("div")
+            let current_id = ++idn
+            parent.setAttribute("id",current_id)
+            let firstchild = document.createElement("div")
+            firstchild.innerHTML = title
+            let secondchild = document.createElement("div")
+            secondchild.innerHTML = description
+            let thirdchild = document.createElement("button")
+            thirdchild.setAttribute("id",current_id+"_bt")
+            thirdchild.innerHTML = "Mark as done!"
+            thirdchild.setAttribute("onclick",`newfunction(${current_id})`)
+            parent.appendChild(firstchild)
+            parent.appendChild(secondchild)
+            parent.appendChild(thirdchild)
+            document.body.appendChild(parent)
+            document.body.appendChild(document.createElement("br"))
+
+        }
+    </script>
+</head>
+<body>
+    <input id = "title" type="text" placeholder="title"><br><br>
+    <input id = "description"type="text" placeholder="description"><br><br>
+    <button onclick="populateresult()">Add Todo</button><br>
+</body>
+</html>
