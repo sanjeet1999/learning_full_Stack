@@ -1,0 +1,29 @@
+#playerName{
+    background-color:orange;
+    padding-left:45%;
+}
+.grid-container{
+    display: grid inline;
+    margin-left: 40%;
+    grid-template-columns: auto auto auto;
+    background-color: greenyellow;
+    padding: 5px;
+    position: relative;
+}
+
+.grid-item{
+    border:black solid;
+    border-width: 1px;
+    padding: 10px;
+    width: 70px;
+    height: 70px;
+    text-align: center;
+    border-radius: 2px;
+    font-weight: 700;
+    
+}
+.grid-item:hover{
+    background-color:rgb(4, 254, 225);   
+}
+
+

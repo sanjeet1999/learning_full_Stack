@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="main_css.css">
+    <title>tik tak toe game</title>
+    <script>
+        var cells = [0,1,2,3,4,5,6,7,8]
+        let totalmoves = 9
+        let players = 0 
+        let player1 = [0,0,0,0,0,0,0,0,0]
+        let player2 = [0,0,0,0,0,0,0,0,0]
+        let winmove = [[0,1,2],[0,3,6],[0,4,8],[1,4,7],[3,4,5],[6,7,8],[2,5,8],[2,4,6]]
+        let execution = []
+        function sum(inputval){
+            var total = 0
+            for (var i = 0; i<winmove.length;i++){
+                totalplayer1=player1[winmove[i][0]]+player1[winmove[i][1]]+player1[winmove[i][2]]
+                totalplayer2=player2[winmove[i][0]]+player2[winmove[i][1]]+player2[winmove[i][2]]
+                if (totalplayer1==3){
+                    alert("player 1 won")
+                    return totalplayer1
+                    break
+                }
+                else if (totalplayer2==3){
+                    alert("player 2 won")
+                    return totalplayer2
+                    break
+                }
+                else  if(totalmoves==0){
+                    alert("match draw")
+                    return none
+                    break
+                }
+                
+
+            }
+           
+        }
+
+        function wincheck(player1,player2,totalmoves){
+            console.log("wincheck",player1)
+            // console.log("wincheckb",player2)
+            for (let j=0;j<winmove.length;j++){
+                console.log(winmove[j],"checks")
+                console.log(player1[winmove[j][0]],"check2")
+                console.log(player1[winmove[j][1]],"check2")
+                console.log(player1[winmove[j][2]],"check2")
+                console.log(sum([player1[winmove[j][0]],player1[winmove[j][1],player1[winmove[j][2]]]]),"summm")
+                if (sum([player1[winmove[j][0]],player1[winmove[j][1],player1[winmove[j][2]]]])==3){
+                    // alert("player 1 won")
+                    break
+                }
+
+                else if (sum([player2[winmove[j][0],player2[winmove[j][1],player2[winmove[j][2]]]]])==3){
+                    // alert("player 2 won")
+                    break
+                }
+                else if(totalmoves==0){
+                    alert("match draw")
+                    break
+                }
+            }
+        }
+
+
+
+
+
+        function mark(element){ 
+            if (players%2==0){
+                player1[element.id]=1
+                let newdiv = document.getElementById('playerName')
+                newdiv.innerHTML="player 1"
+                document.getElementById(element.id).innerHTML="O"
+                var newval = document.getElementById(element.id)
+                newval.setAttribute("disabled",true)
+            }
+
+            else{
+                player2[element.id]=1
+                let newdiv = document.getElementById("playerName")
+                newdiv.innerHTML="player 2"
+                document.getElementById(element.id).innerHTML="X"
+                var newval = document.getElementById(element.id)
+                newval.setAttribute("disabled",true)
+            }
+            totalmoves-=1 
+            players+=1
+            wincheck(player1,player2,totalmoves)
+        }
+            
+    </script>
+</head>
+<body>
+    <div style="text-align: center; color: blueviolet;"><h1><u>Tik tak toe game</u> [X|O]</h1></div>
+    <!-- <h2>First player is X and secondone is O</h2> -->
+    <div id="playerName">player</div>
+
+
+    <div class="grid-container">
+        <button id='0' class="grid-item" onclick="mark(this)"></button>
+        <button id='1' class="grid-item" onclick="mark(this)"></button>
+        <button id='2' class="grid-item" onclick="mark(this)"></button>
+        <button id='3' class="grid-item" onclick="mark(this)"></button>
+        <button id='4' class="grid-item" onclick="mark(this)"></button>
+        <button id='5' class="grid-item" onclick="mark(this)"></button>
+        <button id='6' class="grid-item" onclick="mark(this)"></button>
+        <button id='7' class="grid-item" onclick="mark(this)"></button>
+        <button id='8' class="grid-item" onclick="mark(this)"></button>
+    
+    
+    
+</body>
+</html>
