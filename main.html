@@ -6,62 +6,39 @@
     <link rel="stylesheet" href="main_css.css">
     <title>tic tac toe game</title>
     <script>
+        // Next time put all the scripts in a separate .js file
+        // Where is this cells used?
         var cells = [0,1,2,3,4,5,6,7,8]
+        // Instead of using a total moves, keep a list of moves already played. 
         let totalmoves = 9
-        let players = 0 
+        // Always use camelCase or snake_case. In JS, its common to use camelCase
+        // This variable is used to denote whose turn it is. Make sure someone who reads your code can immediately understand what each of the variable does
+        let turn = "first" // "second"
+        let board = [0,'x',0,'O',0,0,0,0,0];
         let player1 = [0,0,0,0,0,0,0,0,0]
         let player2 = [0,0,0,0,0,0,0,0,0]
         let winmove = [[0,1,2],[0,3,6],[0,4,8],[1,4,7],[3,4,5],[6,7,8],[2,5,8],[2,4,6]]
+        // Another variable that is not used
         let execution = []
-        function sum(inputval){
-            var total = 0
-            for (var i = 0; i<winmove.length;i++){
-                totalplayer1=player1[winmove[i][0]]+player1[winmove[i][1]]+player1[winmove[i][2]]
-                totalplayer2=player2[winmove[i][0]]+player2[winmove[i][1]]+player2[winmove[i][2]]
-                if (totalplayer1==3){
-                    alert("player 1 won")
-                    return totalplayer1
-                    break
-                }
-                else if (totalplayer2==3){
-                    alert("player 2 won")
-                    return totalplayer2
-                    break
-                }
-                else  if(totalmoves==0){
-                    alert("match draw")
-                    return none
-                    break
-                }
-                
-
-            }
-           
-        }
 
         function wincheck(player1,player2,totalmoves){
             console.log("wincheck",player1)
             // console.log("wincheckb",player2)
             for (let j=0;j<winmove.length;j++){
-                console.log(winmove[j],"checks")
-                console.log(player1[winmove[j][0]],"check2")
-                console.log(player1[winmove[j][1]],"check2")
-                console.log(player1[winmove[j][2]],"check2")
-                console.log(sum([player1[winmove[j][0]],player1[winmove[j][1],player1[winmove[j][2]]]]),"summm")
-                if (sum([player1[winmove[j][0]],player1[winmove[j][1],player1[winmove[j][2]]]])==3){
-                    // alert("player 1 won")
-                    break
-                }
-
-                else if (sum([player2[winmove[j][0],player2[winmove[j][1],player2[winmove[j][2]]]]])==3){
-                    // alert("player 2 won")
-                    break
-                }
-                else if(totalmoves==0){
-                    alert("match draw")
-                    break
+                if(board[winmove[j][0]] == board[winmove[j][1]] && board[winmove[j][1]] == board[winmove[j][2]]) {
+                    return board[winmove[j][0]]
                 }
             }
+            let turnsLeft = 0;
+            for(let i = 0; i < board.length; i++) {
+                if(board[i] == 0){
+                    turnsLeft += 1
+                }
+            }
+            if(turnsLeft == 0) {
+                return "draw"
+            }
+            return;
         }
 
 
@@ -69,8 +46,22 @@
 
 
         function mark(element){ 
-            if (players%2==0){
-                player1[element.id]=1
+            // Make this simpler so that you dont have to do the same code multiple times
+            let player = null;
+            let icon = null;
+            if(turn == 0){
+                player = player1;
+                icon = "X";
+            } else {
+                player = player2;
+                icon = "O"
+            }
+            //mark the board
+            // change the value of the element
+            // disable the element.
+            // change the turn
+            // wincheck
+            if (turn == 0){
                 let newdiv = document.getElementById('playerName')
                 newdiv.innerHTML="player 1"
                 document.getElementById(element.id).innerHTML="O"
@@ -87,10 +78,16 @@
                 newval.setAttribute("disabled",true)
             }
             totalmoves-=1 
-            players+=1
+            if(turn == 0){
+                turn = 1
+            } else {
+                turn = 0
+            }
             wincheck(player1,player2,totalmoves)
         }
+        document.onload(function() {
             
+        })
     </script>
 </head>
 <body>
