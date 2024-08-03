@@ -1,0 +1,35 @@
+.grid-container{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 1px;
+    width:10%;
+    margin: 20px auto;
+    background-color: white ;
+    padding: 5px;
+    
+}
+
+.grid-item{
+    border: 1px solid #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding:5px;
+    height:50px;
+    width:60px;
+    border-color: green;
+    font-size: larger;
+}
+
+.grid-item:hover{
+    cursor:grab;
+}
+
+
+.heading{
+    display:inline;
+    margin-left:42% ;
+    background-color: gold;
+    
+}
