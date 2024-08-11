@@ -1,4 +1,4 @@
-let allMoves = [0,0,0,0,0,0,0,0,0]
+let scoreBoard = ["","","","","","","","",""]
 var turn = 0
 var moveCount = 0
 let winmove = [[0,1,2],[0,3,6],[0,4,8],[1,4,7],[3,4,5],[6,7,8],[2,5,8],[2,4,6]]
@@ -7,36 +7,49 @@ let winmove = [[0,1,2],[0,3,6],[0,4,8],[1,4,7],[3,4,5],[6,7,8],[2,5,8],[2,4,6]]
 function mark(element){
     turn = changeTurn(turn)
     let parentDiv = document.getElementById('FatherDiv')
-    let scoreBoard = document.getElementById('turnBoard')
+    let turnBoard = document.getElementById('turnBoard')
     if (turn=="0"){
             parentDiv.style.backgroundColor="red"
             let gridIndex = document.getElementById(element.id)
             gridIndex.innerHTML="X"
-            gridIndex.disabled=true
-            allMoves[element.id] = gridIndex.innerHTML
-            scoreBoard.innerText = "Turn=>O"
+            // gridIndex.disabled=true
+            scoreBoard[element.id] = gridIndex.innerHTML
+            turnBoard.innerText ="O's move"
+            gridIndex.style.pointerEvents='none'
+
     }
     else{
         parentDiv.style.backgroundColor="green"
         let gridIndex = document.getElementById(element.id)
         gridIndex.innerHTML="O"
-        gridIndex.disabled=true
-        allMoves[element.id] = gridIndex.innerHTML
-        scoreBoard.innerText = "Turn=>X"
+        // gridIndex.disabled=true
+        scoreBoard[element.id] = gridIndex.innerHTML
+        turnBoard.innerText ="X's move"
+        gridIndex.style.pointerEvents='none'
+
 
     }
     moveCount+=1
-    checkWinner()
-    remainingBlocks(moveCount)
-
+    var result=checkWinner()
+    if (result=='none'){
+        checkDraw(moveCount)
+    }
 } 
 
-function remainingBlocks(remainingMoves){
+function checkDraw(remainingMoves){
     let parentDiv = document.getElementById('FatherDiv')
+    console.log(remainingMoves,"remaninig")
     if (remainingMoves==9){
         console.log(parentDiv.style.backgroundColor="orange")
-        alert("Match Draw")
-        location.reload()
+        data = document.getElementById("turnBoard")
+        data.innerText="Match Draw"
+        const newdata = document.querySelectorAll(".grid-item")
+        newdata.forEach(element=>{
+                element.style.pointerEvents="none"
+                scoreBoard[element.id] = 0
+    
+        })
+        
     }
 }
 
@@ -52,24 +65,50 @@ function changeTurn(turn){
 }
 
 function checkWinner(){
-    let scoreBoard = document.getElementById("turnBoard")
+    let turnBoard = document.getElementById("turnBoard")
     let result = null
-    let msg = null
+    let msg = 'none'
     for(let i=0;i<winmove.length;i++){
-        if(allMoves[winmove[i][0]]==allMoves[winmove[i][1]]&& allMoves[winmove[i][1]]==allMoves[winmove[i][2]] && allMoves[winmove[i][2]]=="X"){
-            msg = "X is winner"
-            scoreBoard.innerHTML=msg
+        if(scoreBoard[winmove[i][0]]==scoreBoard[winmove[i][1]]&& scoreBoard[winmove[i][1]]==scoreBoard[winmove[i][2]] && scoreBoard[winmove[i][2]]=="X"){
+            msg = "X is winner......!!!!!"
+            turnBoard.innerHTML=msg
             result=1
-        }
-        else if(allMoves[winmove[i][0]]==allMoves[winmove[i][1]]&& allMoves[winmove[i][1]]==allMoves[winmove[i][2]] && allMoves[winmove[i][2]]=="O"){
-            msg = "O is winner"
-            scoreBoard.innerHTML=msg
-            result=1
-        }
-    }
-    if (result==1){ 
-        alert(msg)
-        location.reload()
+            const newdata = document.querySelectorAll(".grid-item")
+            newdata.forEach(element=>{
+            scoreBoard[element.id] = 0
+            element.style.pointerEvents="none"
+            })
 
+        }
+        else if(scoreBoard[winmove[i][0]]==scoreBoard[winmove[i][1]]&& scoreBoard[winmove[i][1]]==scoreBoard[winmove[i][2]] && scoreBoard[winmove[i][2]]=="O"){
+            msg = "O is winner!!!!!!"
+            turnBoard.innerHTML=msg
+            result=1
+            const newdata = document.querySelectorAll(".grid-item")
+            newdata.forEach(element=>{
+            scoreBoard[element.id] = 0
+            element.style.pointerEvents="none"
+            })
+        }
+    
+        
     }
+    return msg
+
+}
+
+function resetButton(){
+    const newdata = document.querySelectorAll(".grid-item")
+    newdata.forEach(element=>{
+    element.innerText=""
+    element.style.pointerEvents='auto';
+    })
+    console.log(scoreBoard,"element")
+    scoreBoard = ["","","","","","","","",""]
+    moveCount = 0
+    var data =  document.getElementById('FatherDiv')
+    data.style.backgroundColor='white';
+    data = document.getElementById("turnBoard")
+    data.innerHTML = "Score Board"
+    
 }

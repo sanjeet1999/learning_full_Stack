@@ -7,24 +7,24 @@
     <title>tic tac toe game</title>
     <script src="index.js"></script>
 </head>
-<body>
+<body >
 
+    <div style="background-image:linear-gradient(to right,aquamarine ,gold ,green);height: 800px;">
     <div style="text-align: center; color: blueviolet;margin-right:1%"><h1><u>Tic tac toe game</u> [X|O]</h1></div>
-    <h2 class="heading">1st player is O and 2nd is X</h2>
-    <div id="FatherDiv" class="grid-container">
-            <button id='0' class="grid-item" onclick="mark(this)"></button> 
-            <button id='1' class="grid-item" onclick="mark(this)"></button>
-            <button id='2' class="grid-item" onclick="mark(this)"></button>
-            <button id='3' class="grid-item" onclick="mark(this)"></button>
-            <button id='4' class="grid-item" onclick="mark(this)"></button>
-            <button id='5' class="grid-item" onclick="mark(this)"></button>
-            <button id='6' class="grid-item" onclick="mark(this)"></button>
-            <button id='7' class="grid-item" onclick="mark(this)"></button>
-            <button id='8' class="grid-item" onclick="mark(this)"></button> 
+    <!-- <h2 class="heading" id="commentryField">1st player is O and 2nd is X</h2> -->
+    <div id = "FatherDiv" class = "grid-container">
+        <div class="grid-item" id="0" onclick="mark(this)"></div>
+        <div class="grid-item" id="1" onclick="mark(this)"></div>
+        <div class="grid-item" id="2" onclick="mark(this)"></div>
+        <div class="grid-item" id="3" onclick="mark(this)"></div>
+        <div class="grid-item" id="4" onclick="mark(this)"></div>
+        <div class="grid-item" id="5" onclick="mark(this)"></div>
+        <div class="grid-item" id="6" onclick="mark(this)"></div>
+        <div class="grid-item" id="7" onclick="mark(this)"></div>
+        <div class="grid-item" id="8" onclick="mark(this)"></div>
     </div> 
-    <div style="text-align: right; margin-right:40%; margin-top:11px;">
-    <div id="turnBoard" style="display: inline; text-align:right; margin-right:1%;background-color:black;color:white">Score Board</h2>
-    <div>
-    
+    <div id="turnBoard" style="display:block;color:black; margin-left:45%; position:absolute;">Score Board</div>
+    <span id="resetButton" style=" margin-left:45%; position: relative;" onclick="resetButton()"><button style="background-color: rgb(132, 0, 255);"> Reset Button</button></span>
+    </div>
 </body>
 </html>
